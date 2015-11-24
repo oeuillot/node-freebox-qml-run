@@ -1,2 +1,4 @@
-# node-freebox-qml-launcher
-Launch qml application on freebox
+# node-freebox-qml-run
+Search Freebox Media players
+Launch qml application
+
