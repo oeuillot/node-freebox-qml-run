@@ -1,41 +1,35 @@
 /*jslint node: true, vars: true, nomen: true */
 'use strict';
 
-var commander = require('commander');
+var commander;
+try {
+  commander = require('commander');
+
+} catch (x) {
+  console
+      .error("In order to use this command, you must install 'commander' (npm install commander)");
+  process.exit(-1);
+}
+
 var debug = require('debug')('freebox-qml-run:cli');
 var freebox = require('./lib/freebox-qml-run');
 
 commander.version(require("./package.json").version);
 
 commander.option("--host <host>", "Freebox host");
+commander.option("--searchTimeout <milliseconds>",
+    "Freebox search timout in milliseconds", parseInt);
 
 commander.command('run').description("Run qml program").action(
     function(programPath) {
-      if (commander.host) {
-        freebox.runQML(programPath, {
-          freeboxAddress : commander.host
-        });
-        return;
-      }
+      freebox.runQML(programPath, {
+        freeboxAddress : commander.host
 
-      freebox.search(1000 * 20, 1, function(error, freeboxAddresses) {
+      }, function(error) {
         if (error) {
           console.error(error);
           return;
         }
-        console.log("Search returns=", freeboxAddresses);
-
-        if (!freeboxAddresses || !freeboxAddresses.length) {
-          console.error("Can not find a freebox !");
-          return;
-        }
-
-        freebox.runQML(programPath, freeboxAddresses[0], function(error) {
-          if (error) {
-            console.error(error);
-            return;
-          }
-        });
       });
     });
 
