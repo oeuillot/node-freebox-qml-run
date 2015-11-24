@@ -2,14 +2,14 @@
 'use strict';
 
 var commander = require('commander');
-var debug = require('debug')('freebox-qml-run');
+var debug = require('debug')('freebox-qml-run:cli');
 var freebox = require('./lib/freebox-qml-run');
 
 commander.version(require("./package.json").version);
 
 commander.option("--host <host>", "Freebox host");
 
-commander.command('run').description("Send program").action(
+commander.command('run').description("Run qml program").action(
     function(programPath) {
       if (commander.host) {
         freebox.runQML(programPath, {
