@@ -16,14 +16,17 @@ var freebox = require('./lib/freebox-qml-run');
 
 commander.version(require("./package.json").version);
 
-commander.option("--host <host>", "Freebox host");
-commander.option("--searchTimeout <milliseconds>",
+commander.option("-t --target <host>", "Freebox host");
+commander.option("-e --entryPoint <entryPoint>", "Application entry point");
+commander.option("--mdnsSearchTimeout <milliseconds>",
     "Freebox search timout in milliseconds", parseInt);
 
 commander.command('run').description("Run qml program").action(
-    function(programPath) {
-      freebox.runQML(programPath, {
-        freeboxAddress : commander.host
+    function(manifestPath) {
+      freebox.runQML(manifestPath, {
+        freeboxAddress : commander.target,
+        searchTimeout : commander.mdnsSearchTimeout,
+        entryPoint : commander.entryPoint
 
       }, function(error) {
         if (error) {
