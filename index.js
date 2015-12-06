@@ -21,9 +21,9 @@ commander.option("-e --entryPoint <entryPoint>", "Application entry point");
 commander.option("--mdnsSearchTimeout <milliseconds>",
     "Freebox search timout in milliseconds", parseInt);
 
-commander.command('run').description("Run qml program").action(
+commander.command('run <applicationPath>').description("Run qml program").action(
     function(manifestPath) {
-      freebox.runQML(manifestPath, {
+      freebox.run(manifestPath, {
         freeboxAddress : commander.target,
         searchTimeout : commander.mdnsSearchTimeout,
         entryPoint : commander.entryPoint
