@@ -1,19 +1,19 @@
 {
   "name": "freebox-qml-run",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Node JS Freebox qml run",
   "bin": {
     "freebox-qml-run": "./bin/freebox-qml-run"
   },
   "main": "./lib/freebox-qml-run.js",
   "dependencies": {
-  	"request": "latest",
-    "send": "latest",
+  	"request": "^2.67",
+    "send": "^0.13",
     "debug": "~2.2",
-    "my-local-ip": "latest",
-    "mdns-js": "latest",
-    "serve-static": "latest",
-    "connect": "latest"
+    "my-local-ip": "~1.0",
+    "mdns-js": "~0.4",
+    "serve-static": "^1.10",
+    "connect": "^3.4.0"
   },
   "keywords": [
     "freebox","qml"
